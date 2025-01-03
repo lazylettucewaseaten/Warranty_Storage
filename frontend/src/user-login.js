@@ -9,8 +9,9 @@ const navigate =useNavigate();
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
+    isMerchant:false
   });
-  const [err ,checkerr] =React.useState(0);
+  const [err ,checkerr] =React.useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -24,23 +25,37 @@ const navigate =useNavigate();
     e.preventDefault();
     try {
       const task = await axios.post("http://localhost:5000/warranty/setup/id", formData);
-      console.log(task.data.hashed);
       const check =compareSync(formData.password ,task.data.hashed)
       if(check)
+        {
+      if(!formData.isMerchant)
       {
-        const token = task.data.token;
-
-        // Save the token to localStorage
-        localStorage.setItem("jwt_token", token);
-        localStorage.setItem("Data" ,formData.email)
-        navigate("/UserEdit");
-
-        console.log("done")
-      }
-
-    } catch (error) {
-      checkerr(1);
-    }
+        console.log(formData.isMerchent)
+            const token = task.data.token;
+            // Save the token to localStorage
+            localStorage.setItem("jwt_token", token);
+            localStorage.setItem("Data" ,formData.email)
+            navigate("/UserEdit");
+            
+            console.log("done")
+          }
+          else
+          {
+            const token = task.data.token;
+            // Save the token to localStorage
+            localStorage.setItem("jwt_token", token);
+            localStorage.setItem("Data" ,formData.email)
+            localStorage.setItem("SN", task.data.StoreName);
+            localStorage.setItem("SA" ,task.data.StoreLocation)
+            navigate("/Currentwarrantylist");
+            
+            console.log("chus")
+          }
+        }
+        
+        } catch (error) {
+          checkerr(1);
+        }
   };
 
   return (
@@ -75,7 +90,24 @@ const navigate =useNavigate();
           placeholder="Enter your password"
           required
         />
-      </div>
+        </div>
+        <div className="form-group">
+  <label htmlFor="isMerchant">Is Merchant</label>
+  <input
+    type="checkbox"
+    className="mx-2"
+    id="isMerchant"
+    checked={formData.isMerchant} 
+    onChange={() =>
+      setFormData((prevData) => ({
+        ...prevData,
+        isMerchant: !prevData.isMerchant, 
+      }))
+    }
+  />
+  <label>{formData.isMerchant ? "Yes" : "No"}</label>
+</div>
+
 
       {/* Forgot Password Link */}
       <div className="form-group d-flex justify-content-between align-items-center">

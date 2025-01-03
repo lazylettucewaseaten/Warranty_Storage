@@ -33,8 +33,10 @@ function RegisterMerchant({ togglePage }) {
     try {
       // Make a POST request to the backend with form data
       const response = await axios.post('http://localhost:5000/warranty/setup/addmerchant', formData);
-      console.log(response.data);  // Handle success response
+      console.log(response.data); 
       alert('Registration successful!');
+      localStorage.setItem("IsClient" ,"NO");
+      localStorage.setItem("Data" ,formData.work_email)
     } catch (error) {
       console.error('Error registering:', error);  // Handle error
       alert('Error registering. Please try again.');
@@ -196,6 +198,10 @@ function RegisterMerchant({ togglePage }) {
         Register
       </button>
     </form>
+    <div className="text-center mt-3">
+                <p>Already have an account? <Link to="/login" className="text-primary">Login</Link>
+                </p>
+              </div>
         </div>
       </div>
     );

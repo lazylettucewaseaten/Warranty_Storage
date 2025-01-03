@@ -24,9 +24,6 @@ const CheckAuthAndRedirect = () => {
           },
         });
         console.log("Token verified. Data:", data);
-
-        // Optional: Navigate to a specific page if needed
-        navigate("/UserEdit");
       } catch (error) {
         console.error("Token verification failed:", error);
         localStorage.removeItem("jwt_token"); // Remove invalid token

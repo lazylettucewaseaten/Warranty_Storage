@@ -42,25 +42,54 @@ const bcrypt =require('bcrypt');
 }
 
 const fetchingdetails=async(req,res)=>{
-    //got the email
-    try {
-        const output=await UserLogin.find({ email : req.body.email})
-        if(output.length===0){
-            return res.status(404).json({success:false,"msg":"user not found"})
-        }
-        console.log(output[0].password)
-        const user = { email:req.body.email}; // Example user (this should be retrieved from your database)
-        const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1h" });
-        console.log(token)
-        const data={
-            "hashed":output[0].password,
-            "token":token
-        }
-        console.log(data)
-        res.status(200).json(data)
+    console.log(req.body.isMerchant)
+    if(req.body.isMerchant)
+    {
+        try {
+            const output=await Merchant.find({ work_email : req.body.email})
+            if(output.length===0){
+                return res.status(404).json({success:false,"msg":"user not found"})
+            }
+            console.log(output[0].password)
+            const user = { email:req.body.email}; // Example user (this should be retrieved from your database)
+            const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1h" });
+            console.log(token)
+            const data={
+                "hashed":output[0].password,
+                "token":token,
+                "StoreLocation":output[0].business_add,
+                "StoreName":output[0].business_name
+            }
 
-    } catch (error) {
-        res.status(500).json(error)
+            console.log(data)
+            res.status(200).json(data)
+            
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    }
+    else
+    {
+
+        try {
+            const output=await UserLogin.find({ email : req.body.email})
+            if(output.length===0){
+                return res.status(404).json({success:false,"msg":"user not found"})
+            }
+            console.log(output[0].password)
+            const user = { email:req.body.email}; // Example user (this should be retrieved from your database)
+            const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1h" });
+            console.log(token)
+            const data={
+                "hashed":output[0].password,
+                "token":token
+            }
+            console.log(data)
+            res.status(200).json(data)
+            
+        } catch (error) {
+            res.status(500).json(error)
+        }
     }
 }
 
