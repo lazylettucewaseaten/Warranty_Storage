@@ -1,0 +1,133 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fa;
+  }
+  
+  .register-merchant-container {
+    position: relative;
+    background-image: url('../public/bg2.jpg'); /* Add your image URL here */
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Background Blur Effect */
+  .register-merchant-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for better contrast */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    z-index: 1; /* Put the overlay above the background image */
+  }
+  
+  /* Form Card Styling */
+  .register-form-card {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 40px;
+    border-radius: 10px;
+    width: 700px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Subtle white border */
+  }
+  
+  h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
+  
+  .form-check-input {
+    margin-right: 10px;
+  }
+  
+  .form-check-label {
+    font-size: 14px;
+  }
+  
+  .btn {
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .mt-3 {
+    margin-top: 20px;
+  }
+  
+  .text-primary {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .text-primary:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .register-form-card {
+      width: 90%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .register-form-card {
+      width: 95%;
+      padding: 20px;
+    }
+  }
+  

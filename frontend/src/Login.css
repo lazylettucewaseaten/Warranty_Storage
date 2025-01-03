@@ -1,0 +1,172 @@
+
+.formlogin{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: burlywood;
+    height: 45%;
+    width: 20%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 1.1rem;
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: 1.4fr;
+    gap: 0.2rem;
+    justify-items: center;
+    align-items: center;
+  }
+  .loginhead{
+    margin-top: 50%;
+    margin: 0;
+    font-size: x-large;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  .inputbox{
+    margin: 0;
+    width: 90%;
+    height: 2.1rem;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+    outline: none;
+  }
+  
+  .submit{
+    height: 2.7rem;
+    width: 25%;
+    border-radius: 1.1rem;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  .forgot{
+    width: 90%;
+    text-align: left;
+    font-size: 0.9rem;
+    cursor: pointer;
+    /* position: relative; */
+    /* left:0% */
+  }
+    /* Global styles */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body, html {
+    height: 100%;
+  }
+  
+  /* Set up the background with blur effect */
+  .app-container {
+    position: relative;
+    background-image: url('../public/bg2.jpg'); /* Add your image URL here */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .app-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for better contrast */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    z-index: 1; /* Put the overlay above the background image */
+  }
+  
+  /* Ensure form is on top of the blurred overlay */
+  .d-flex {
+    z-index: 2;
+  }
+  
+  .card {
+    background-color: rgba(255, 255, 255, 0.85); /* Light background for the card */
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-control {
+    height: 45px;
+    border-radius: 30px;
+    padding-left: 20px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #2575fc;
+    outline: none;
+  }
+  
+  .forgot-password {
+    color: #2575fc;
+    font-size: 0.9rem;
+  }
+  
+  .forgot-password:hover {
+    text-decoration: underline;
+  }
+  
+  .btn-primary {
+    background-color: #2575fc;
+    border-radius: 30px;
+    padding: 12px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signup-link {
+    font-size: 0.9rem;
+  }
+  
+  .signup-link a {
+    font-weight: 500;
+    color: #2575fc;
+    text-decoration: none;
+  }
+  
+  .signup-link a:hover {
+    text-decoration: underline;
+  }
+  
+  
+  
+  
+  
+  
+  .card {
+    background-color: rgba(255, 255, 255, 0.85); /* Light background for the card */
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover animation */
+    z-index: 2; /* Ensure form stays above the blur */
+  }
+  .card:hover {
+    transform: scale(1.05); /* Slight scale-up effect when hovered */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
+  }
+  .btn-primary:hover {
+    border: none;
+    background-color: #9d77c7;
+  }  
