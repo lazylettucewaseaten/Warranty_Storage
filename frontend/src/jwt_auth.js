@@ -8,7 +8,7 @@ const CheckAuthAndRedirect = () => {
   useEffect(() => {
     const verifyToken = async () => {
       const token = localStorage.getItem("jwt_token");
-      console.log(token);
+      // console.log(token);
 
       if (!token) {
         // Redirect to login if no token is present

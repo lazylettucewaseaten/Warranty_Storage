@@ -32,8 +32,9 @@ const navigate =useNavigate();
 
         // Save the token to localStorage
         localStorage.setItem("jwt_token", token);
-        
+        localStorage.setItem("Data" ,formData.email)
         navigate("/UserEdit");
+
         console.log("done")
       }
 

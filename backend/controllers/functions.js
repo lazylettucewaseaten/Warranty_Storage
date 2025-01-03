@@ -120,7 +120,7 @@ const uploadwarranty = async (req, res) => {
 const getWarranty = async (req, res) => {
     try {
         const warranty = await UserWarranty.find({ email: req.body.email });
-
+        console.log(warranty)
         res.status(200).json(warranty);
     } catch (error) {
         res.status(500).send(error);

@@ -13,9 +13,8 @@ const WarrantyList = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const location = useLocation();
-  const { email } = location.state || {};
   const [newWarranty, setNewWarranty] = useState({
-    email:email,
+    email:"",
     product_name: "",
     store_name: "",
     store_location: "",
@@ -23,23 +22,26 @@ const WarrantyList = () => {
     status: "Pending Verification",
   });
 
+// let email =""
 
 
-
-
-  const fetchWarranties = async () => {
-    try {
-      const response = await axios.post("http://localhost:5000/warranty/setup/getwarranty" ,{"email":email});
-      console.log(response.data)
+let data
+useEffect(() => {
+  
+  fetchWarranties();
+}, []);
+const fetchWarranties = async () => {
+  try {
+    data =await localStorage.getItem("Data");
+    setNewWarranty((prev) => ({ ...prev, email: data }));
+    console.log(data);
+    const response = await axios.post("http://localhost:5000/warranty/setup/getwarranty" ,{"email":data});
+      console.log(newWarranty.email)
       setWarranties(response.data);
     } catch (error) {
       console.error("Error fetching warranties:", error);
     }
   };
-
-  useEffect(() => {
-    fetchWarranties();
-  }, []);
 
   const handleDialogOpen = () => setOpenDialog(true);
   const handleDialogClose = () => setOpenDialog(false);
@@ -49,12 +51,10 @@ const WarrantyList = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewWarranty((prev) => ({ ...prev, [name]: value }));
-    setNewWarranty((prev) => ({ ...prev, email: email }));
   };
 
   const handleFileChange = (e) => {
     setNewWarranty((prev) => ({ ...prev, invoice: e.target.files[0] }));
-     setNewWarranty((prev) => ({ ...prev, email: email }));
   };
 
   const handleFormSubmit = async () => {
