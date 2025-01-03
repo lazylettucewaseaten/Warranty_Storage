@@ -29,7 +29,7 @@ const DataValidationPage = () => {
         store_location: store_location
       });
       
-    //   console.log("API Response:", response.data); 
+      console.log("API Response:", response.data); 
 
       if (response.data.data.length > 0) { 
         setData(response.data.data);
@@ -107,11 +107,29 @@ const DataValidationPage = () => {
               <TableCell>Store Name</TableCell>
               <TableCell>Store Location</TableCell>
               <TableCell>Status</TableCell>
+              <TableCell>Invoice</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row) => (
+            {data.map((row) => {
+              const fileTypePrefix = row.invoice.slice(0, 5);
+              let fileType = "";
+              let fileExtension = "";
+              if (fileTypePrefix === "JVBER") {
+                fileType = "application/pdf";
+                fileExtension = "pdf";
+              }
+              else{
+                  fileType = "image/png";
+                  fileExtension = "png";
+                
+              }
+              const curstatus=row.status
+              // console.log(curstatus)
+              if(curstatus!='rejected'){  
+            return (
+              
               <TableRow
                 key={row._id}
                 sx={{
@@ -139,6 +157,8 @@ const DataValidationPage = () => {
                   />
                 </TableCell>
                 <TableCell>
+                  <a href={`data:${fileType};base64,${row.invoice}` }download={`invoice.${fileExtension}`}>Invoice Download</a></TableCell>
+                <TableCell>
                   {row.status === 'Pending Verification' ? (  
                     <Button 
                       variant="contained" 
@@ -157,7 +177,9 @@ const DataValidationPage = () => {
                   )}
                 </TableCell>
               </TableRow>
-            ))}
+            )
+          }
+            })}
           </TableBody>
         </Table>
       </TableContainer>
