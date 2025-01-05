@@ -110,6 +110,17 @@ const DataValidationPage = () => {
     fetchData();
   }, []);
 
+  const [yearexpiry,setYearexpiry]=useState([]);
+  const [monthexpiry,setMonthexpiry]=useState([]);
+  const handleyearchange=async(e)=>{
+    e.preventDefault();
+    setYearexpiry(e.target.value);
+  }
+  const handlemonthchange=async(e)=>{
+    e.preventDefault();
+    setMonthexpiry(e.target.value);
+  }
+
   const handleValidationPrompt = (item) => {
     setSelectedItem(item);
     setOpenDialog(true);
@@ -287,6 +298,29 @@ const DataValidationPage = () => {
         <DialogContent>
           Are you sure you want to validate this entry?
         </DialogContent>
+        <div className="d-flex" style={{ maxWidth: '20rem', margin: '0 auto' }}>
+  {/* <div className="text-center"> */}
+    <div className='mx-2 d-flex'>
+      Year:
+      <input
+        type="text"
+        value={yearexpiry}
+        onChange={handleyearchange}
+        style={{ width: '100%' }}
+      />
+    </div>
+    <div  className='mx-2 d-flex'>
+      Month:
+      <input
+        type="text"
+        value={monthexpiry}
+        onChange={handlemonthchange}
+        style={{ width: '100%' }}
+      />
+    {/* </div> */}
+  </div>
+</div>
+
         <DialogActions>
           <Button 
             onClick={() => handleValidation(false)} 

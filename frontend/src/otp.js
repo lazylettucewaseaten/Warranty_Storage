@@ -37,7 +37,7 @@ function OTPVerification() {
         }
 
     };
-    window.addEventListener('load', sendMail());
+    // window.addEventListener('load', sendMail());
     return (
         <div className="container d-flex justify-content-center align-items-center vh-100" >
             <div className="card p-4 shadow-lg" style={{ maxWidth: '400px', width: '100%' }}>

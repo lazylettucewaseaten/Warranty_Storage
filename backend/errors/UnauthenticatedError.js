@@ -6,13 +6,5 @@ class UnauthenticatedError extends Error {
   }
   
   module.exports = UnauthenticatedError;
-  //Data Validation Page UI
-  //Login Old
-  //FAQs
-  //G Auth
-  //Reject nodemailer form delete from database
   //Expiry Date Display
-  //Forgot Password
   //Host
-  //kafi hai 
-  
