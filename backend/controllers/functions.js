@@ -190,12 +190,51 @@ const Contact =asyncWrapper(async(req ,res)=>{
 });
 
 
+const rejectionmail =asyncWrapper(async(req ,res)=>{
+    // console.log("hello")
+    const message=req.body.message;
+    const emailuser=req.body.email;
+    const product_name=req.body.product_name;
+    const purchase_date=req.body.purchase_date;
+    const store_name=req.body.store_name;
+    const store_location=req.body.store_location;
+    const  phone_no=req.body.phone_no;
+    const text= `Your  ${product_name} purchased on ${purchase_date} was recieved on our ${store_name} at ${store_location} has been rejected due to the followingg reasons.` ;
+    const text2=`For further queries visit our store or contact us on ${phone_no}`
+    const mailData = {
+        from:process.env.Email ,  
+        to: `${emailuser}`,   
+        subject: 'Rejection of the Warranty ',
+        html: `<b>Hey there! </b> <br>  ${text} <br> ${message} <br> ${text2}`,
+    };
+    
+    // Create transporter using Gmail's SMTP server
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,  // Correct SMTP port for Gmail (SSL)
+        secure: true,  // Use SSL
+        auth: {
+            user: process.env.Email,  // Your Gmail address
+            pass: process.env.Password,         // Your Gmail app password (not your account password)
+        },
+    });
+    transporter.sendMail(mailData, (error, info) => {
+        if (error) {
+            console.log('Error sending email:', error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+    res.status(201).json({success:true});
+});
+
+
 
 
 
 const fetchvalidations = async (req, res) => {
     try {
-        const { store_name, store_location } = req.body;
+        const { store_name, store_location,status } = req.body;
 
         // Validate required parameters
         if (!store_name || !store_location) {
@@ -205,8 +244,16 @@ const fetchvalidations = async (req, res) => {
             });
         }
 
-        // Fetch the warranties based on store_name and store_location
-        const output = await UserWarranty.find({ store_name, store_location });
+        // Fetch the warranties based on store_name and store_location\
+        let output;
+        console.log(status)
+        if(status!=='All' && status!==null){
+            output = await UserWarranty.find({ store_name, store_location, status });
+        }
+        else{
+            console.log("Here")
+            output = await UserWarranty.find({ store_name, store_location});
+        }
 
         // If no warranties found, return a message
         if (output.length === 0) {
@@ -258,4 +305,4 @@ const updatewarrantystatus = async (req, res) => {
         });
     }
 };
-module.exports={addingnewuser,fetchingdetails,addingnewmerchantuser,uploadwarranty,getWarranty ,Contact,updatewarrantystatus,fetchvalidations}
+module.exports={addingnewuser,fetchingdetails,addingnewmerchantuser,uploadwarranty,getWarranty ,Contact,updatewarrantystatus,fetchvalidations,rejectionmail}

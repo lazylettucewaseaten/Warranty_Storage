@@ -2,7 +2,7 @@ const express=require('express')
 const multer = require('multer');
 const upload = multer();
 const router=express.Router()
-const {addingnewuser,fetchingdetails, addingnewmerchantuser, uploadwarranty,getWarranty ,Contact,fetchvalidations,updatewarrantystatus}=require('../controllers/functions')
+const {addingnewuser,fetchingdetails, addingnewmerchantuser, uploadwarranty,getWarranty ,Contact,fetchvalidations,updatewarrantystatus, rejectionmail}=require('../controllers/functions')
 const authHeader =require('../middleware/auth')
 
 router.route('/').post(addingnewuser)
@@ -19,6 +19,6 @@ router.route('/merchantverifications').post(fetchvalidations);
 router.route('/merchantverifications/:id').patch(updatewarrantystatus);
 
 router.route('/contactus').post(Contact);
-
+router.route('/rejectwarranty').post(rejectionmail);
                             
 module.exports=router
