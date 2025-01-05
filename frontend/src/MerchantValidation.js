@@ -20,13 +20,13 @@ const DataValidationPage = () => {
   const [data, setData] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const store_name=localStorage.getItem("store_name");
-  const store_location=localStorage.getItem("store_location");
+  const store_name=localStorage.getItem("SN");
+  const store_location=localStorage.getItem("SA");
   const fetchData = async () => {
     try {
       const response = await axios.post('http://localhost:5000/warranty/setup/merchantverifications', {
-        store_name: "Addidas", 
-        store_location: "Jaipur"
+        store_name: store_name, 
+        store_location: store_location
       });
       
       console.log("API Response:", response.data); 
