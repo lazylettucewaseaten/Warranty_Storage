@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #6f42c1, #b33eaf);
-  background: url("https://cdn.pixabay.com/photo/2022/06/12/22/48/gradient-7258997_1280.png");
+  /* background: url("https://cdn.pixabay.com/photo/2022/06/12/22/48/gradient-7258997_1280.png"); */
   background-size: cover;
   padding: 20px;
   box-sizing: border-box;

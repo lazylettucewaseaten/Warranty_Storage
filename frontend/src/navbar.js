@@ -2,8 +2,15 @@ import kingAB from "./assets/AB.png"
 
 export default function Navbar(){
     return (
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary"
+        sx={{
+          backgroundColor: '#008bff',
+        }}>
+        <div class="container-fluid"
+        sx={{
+          backgroundColor: '#FF0000',
+        }}>
+        
           <a class="navbar-brand " href="/">
                 <img src={kingAB} alt="Logo" width="50" height="50" class="d-inline-block rounded-pill img-fluid mx-3" />
             

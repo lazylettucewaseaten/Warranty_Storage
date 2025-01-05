@@ -5,6 +5,7 @@ import axios from 'axios'
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Navbar from "./navbar";
 export default function Register(){
   const [text, setText] = useState("");
   const words = ["Welcome Back!", "Secure Login", "Your Journey Starts Here"];
@@ -80,7 +81,8 @@ await axios.post('http://localhost:5000/warranty/setup', formData);
 
 
     return (
-        
+      <>
+      <Navbar/>
 <div className="page-container">
       <div className="content-wrapper">
         <div className="typewriter-section">
@@ -104,7 +106,7 @@ await axios.post('http://localhost:5000/warranty/setup', formData);
                 value={formData.username}
                 onChange={handleChange}
                 required
-              />
+                />
             </div>
 
             <div className="form-group">
@@ -118,7 +120,7 @@ await axios.post('http://localhost:5000/warranty/setup', formData);
                 value={formData.email}
                 onChange={handleChange}
                 required
-              />
+                />
             </div>
 
             <div className="form-group">
@@ -132,14 +134,14 @@ await axios.post('http://localhost:5000/warranty/setup', formData);
                 value={formData.password}
                 onChange={handleChange}
                 required
-              />
+                />
             </div>
 
             {/* <div className="form-options">
               <label className="remember-me">
-                <input type="checkbox" /> Remember me
+              <input type="checkbox" /> Remember me
               </label>
-            </div> */}
+              </div> */}
 
   <button type="submit" className="btn btn-primary btn-block mt-3">
     Sign Up
@@ -153,6 +155,7 @@ await axios.post('http://localhost:5000/warranty/setup', formData);
         </div>
       </div>
     </div>          
+              </>
   );
 }
             
