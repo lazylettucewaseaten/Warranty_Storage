@@ -3,7 +3,7 @@ const multer = require('multer');
 const upload = multer();
 const router=express.Router()
 // <<<<<<< HEAD
-const {addingnewuser,fetchingdetails, addingnewmerchantuser, uploadwarranty,getWarranty ,Contact,fetchvalidations,updatewarrantystatus,  OTP, UpdatePassword,rejectionmail}=require('../controllers/functions')
+const {addingnewuser,fetchingdetails, addingnewmerchantuser, uploadwarranty,getWarranty ,Contact,fetchvalidations,updatewarrantystatus,  OTP, UpdatePassword,rejectionmail, UpdateExpiry}=require('../controllers/functions')
 // =======
 // const {addingnewuser,fetchingdetails, addingnewmerchantuser, uploadwarranty,getWarranty ,Contact,fetchvalidations,updatewarrantystatus,}=require('../controllers/functions')
 // >>>>>>> 27950cdf6cf580a1ff8d31ccfd84f4e542458d33
@@ -31,5 +31,7 @@ router.route('/OTP').post(OTP)
 
 router.route('/UpdatePassword').post(UpdatePassword)
 // >>>>>>> 27950cdf6cf580a1ff8d31ccfd84f4e542458d33
+
+router.route('/UpdateExpiry').post(UpdateExpiry)
                             
 module.exports=router

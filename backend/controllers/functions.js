@@ -366,6 +366,25 @@ const UpdatePassword=async (req,res) => {
 
 
 
+// expiryDate Change 
+
+
+
+const UpdateExpiry=async (req,res) => {
+    const {year ,month ,ID} =req.body
+    try{
+        const task=await UserLogin.findOne({ID})
+        console.log(task.data)
+        let date = new Date(inputDate);
+      date.setFullYear(date.getFullYear() +year );
+      date.setMonth(date.getMonth() + month);
+        await UserLogin.findOneAndUpdate({ID} ,{expiry_date:date})
+
+    }
+    catch(error){
+        res.status(500).json(error)
+    }
+}
 
 
 
@@ -381,4 +400,6 @@ const UpdatePassword=async (req,res) => {
 
 
 
-module.exports={addingnewuser,fetchingdetails,rejectionmail,addingnewmerchantuser,uploadwarranty,getWarranty ,Contact,updatewarrantystatus,fetchvalidations ,OTP ,UpdatePassword}
+
+
+module.exports={addingnewuser,fetchingdetails,rejectionmail,addingnewmerchantuser,uploadwarranty,getWarranty ,Contact,updatewarrantystatus,fetchvalidations ,OTP ,UpdatePassword ,UpdateExpiry}
