@@ -59,7 +59,8 @@ const fetchingdetails=async(req,res)=>{
                 "hashed":output[0].password,
                 "token":token,
                 "StoreLocation":output[0].business_add,
-                "StoreName":output[0].business_name
+                "StoreName":output[0].business_name,
+                "WorkNumber":output[0].work_phone,
             }
             console.log(data)
             res.status(200).json(data)
@@ -305,4 +306,79 @@ const updatewarrantystatus = async (req, res) => {
         });
     }
 };
-module.exports={addingnewuser,fetchingdetails,addingnewmerchantuser,uploadwarranty,getWarranty ,Contact,updatewarrantystatus,fetchvalidations,rejectionmail}
+
+
+
+
+
+
+// Adding Forget Password apis
+
+const OTP =asyncWrapper(async(req ,res)=>{
+    console.log(req.body)
+    const mailData = {
+        from:process.env.Email ,  // sender address
+        to: req.body.email,    // list of receivers
+        subject: 'Conformation of the Query',
+        text: 'Your Query Has been Received ,We will process it shortly ',
+        html: `<b>Hey there! </b><br> Your OTP for Warranty Storage Password Change is ${req.body.num}<br/>`,
+    };
+    
+    // Create transporter using Gmail's SMTP server
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,  // Correct SMTP port for Gmail (SSL)
+        secure: true,  // Use SSL
+        auth: {
+            user: process.env.Email,  // Your Gmail address
+            pass: process.env.Password,         // Your Gmail app password (not your account password)
+        },
+    });
+    transporter.sendMail(mailData, (error, info) => {
+        if (error) {
+            console.log('Error sending email:', error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+    // res.status(201).json({task});
+});
+
+
+
+const UpdatePassword=async (req,res) => {
+    const {email ,password} =req.body
+    let unhashedpassword=(password)
+    const saltRounds=10
+    salt=bcrypt.genSaltSync(saltRounds)
+    const hashed=bcrypt.hashSync(unhashedpassword,salt)
+    try{
+        const task=await UserLogin.findOneAndUpdate({email} ,{password:hashed})
+        console.log(hashed)
+        res.status(201).json({task});
+
+    }
+    catch(error){
+        res.status(500).json(error)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports={addingnewuser,fetchingdetails,rejectionmail,addingnewmerchantuser,uploadwarranty,getWarranty ,Contact,updatewarrantystatus,fetchvalidations ,OTP ,UpdatePassword}
