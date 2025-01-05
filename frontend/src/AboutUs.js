@@ -1,10 +1,11 @@
 import { Container, Row, Col, Card } from 'react-bootstrap';
+import ashish from './assets/ashish.png'
+import ab from './assets/ab2.png'
+import "./AboutUs.css"
 import Navbar from './navbar';
-
 const teamMembers = [
-  { name: 'John Doe', position: 'CEO', image: 'path/to/image1.jpg' },
-  { name: 'Jane Smith', position: 'CTO', image: 'path/to/image2.jpg' },
-  { name: 'Mark Lee', position: 'Lead Designer', image: 'path/to/image3.jpg' }
+  { name: 'Ashish Ranjan', image: ashish },
+  { name: 'Arpit Bhomia', image: ab }
 ];
 
 const values = [
@@ -17,72 +18,61 @@ const values = [
 function AboutUs() {
   return (
     <div>
-      <Navbar />
-    <Container className="my-5">
-      {/* Hero Section */}
-      <Row className="text-center mb-5">
-        <Col>
-          <h1 className="display-4">Welcome to Our Company</h1>
-          <p className="lead">
-            We are dedicated to delivering excellence and exceeding client expectations.
-          </p>
-        </Col>
-      </Row>
-
-      {/* Our Story Section */}
-      <Row className="mb-5">
-        <Col>
-          <h2>Our Story</h2>
-          <p>
-            Founded in 2020, our company has grown quickly, driven by a passion for quality
-            and a commitment to customer satisfaction. With a talented team and innovative
-            solutions, we aim to lead the industry and make a positive impact.
-          </p>
-        </Col>
-      </Row>
-
-      {/* Meet the Team Section */}
-      <Row className="mb-5 text-center">
-        <Col>
-          <h2>Meet the Team</h2>
-        </Col>
-      </Row>
-      <Row className="justify-content-center">
-        {teamMembers.map((member, index) => (
-          <Col key={index} md={4} className="mb-4">
-            <Card className="shadow-sm">
-              <Card.Img variant="top" src={member.image} alt={member.name} />
-              <Card.Body>
-                <Card.Title>{member.name}</Card.Title>
-                <Card.Text>{member.position}</Card.Text>
-              </Card.Body>
-            </Card>
+    <Navbar/>
+    <div className="about-us-container">
+      <Container className="my-5">
+        <Row className="hero-section text-center mb-5">
+          <Col>
+            <h1 className="display-4 hero-title">Welcome to World of Assurance</h1>
+            <p className="lead hero-subtitle">
+              We implemented a centralized warranty storage system for Entrepreneurs
+            </p>
+            <div className="hero-divider"></div>
           </Col>
-        ))}
-      </Row>
+        </Row>
 
-      {/* Our Values Section */}
-      <Row className="mb-5 text-center">
-        <Col>
-          <h2>Our Values</h2>
-          <p>We are driven by values that shape our culture and guide our work.</p>
-        </Col>
-      </Row>
-      <Row className="justify-content-center">
-  {values.map((value, index) => (
-    <Col key={index} md={3} sm={4} xs={6} className="mb-3 d-flex justify-content-center">
-      <Card className="shadow-sm p-3" style={{ width: '150px', height: '100px' }}>
-        <Card.Body className="d-flex align-items-center justify-content-center">
-          <Card.Title className="text-center text-nowrap" style={{ fontSize: '1rem', margin: 0 }}>
-            {value}
-          </Card.Title>
-        </Card.Body>
-      </Card>
-    </Col>
-  ))}
-</Row>
-    </Container>
-  </div>
+        <Row className="background-section mb-5">
+          <Col>
+            <h2 className="section-title">Our Vision</h2>
+            <p className="section-description">
+              It comes packed with a range of useful features, like securely hashing passwords, handling JWT authentication, and  sending emails to the creator. It's a simple yet powerful backend solution that covers all the essentials.
+            </p>
+          </Col>
+        </Row>
+
+        <Row className="team-section mb-5 text-center">
+          <Col>
+            <h2 className="section-title">Meet the Team</h2>
+            <p className="section-subtitle">The brilliant minds behind our project</p>
+          </Col>
+        </Row>
+        
+        <Row className="team-members justify-content-center">
+          {teamMembers.map((member, index) => (
+            <Col key={index} md={4} className="mb-4">
+              <div className="team-member-card">
+                <div className="member-image-container">
+                  <img 
+                    src={member.image} 
+                    alt={member.name} 
+                    className="member-image"
+                    />
+                  <div className="image-overlay"></div>
+                </div>
+                <div className="member-details">
+                  <h3 className="member-name">{member.name}</h3>
+                  <p className="member-position">{member.position}</p>
+                </div>
+              </div>
+            </Col>
+          ))}
+        </Row>
+
+       
+      </Container>
+    </div>
+          </div>
   );
-};
+}
+
 export default AboutUs;
