@@ -1,15 +1,7 @@
-import "./Login.css";
-// import './Register.css'
-import { Link, Navigate } from "react-router-dom";
+import React from "react"
+import { Link } from "react-router-dom";
 import axios from 'axios'
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import Navbar from "./navbar";
 export default function Register(){
-  const [text, setText] = useState("");
-  const words = ["Welcome Back!", "Secure Login", "Your Journey Starts Here"];
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [formData, setFormData] = React.useState({
     username: '',
     email: '',
@@ -24,47 +16,6 @@ export default function Register(){
       [name]: value
     });
   };
-  const navigate=useNavigate();
-  const handlenavigatelogin=(e)=>{
-    e.preventDefault();
-    navigate('/Login')
-  }
-
-  useEffect(() => {
-    let currentLetterIndex = 0;
-    let isAdding = true;
-
-    const typeWriter = () => {
-      const currentWord = words[currentWordIndex];
-
-      if (isAdding) {
-        if (currentLetterIndex <= currentWord.length) {
-          setText(currentWord.slice(0, currentLetterIndex));
-          currentLetterIndex++;
-        } else {
-          setTimeout(() => {
-            isAdding = false;
-            currentLetterIndex--;
-          }, 1000);
-        }
-      } else {
-        if (currentLetterIndex >= 0) {
-          setText(currentWord.slice(0, currentLetterIndex));
-          currentLetterIndex--;
-        } else {
-          isAdding = true;
-          setCurrentWordIndex((prev) => (prev + 1) % words.length);
-          currentLetterIndex = 0;
-        }
-      }
-    };
-
-    const interval = setInterval(typeWriter, 200);
-    return () => clearInterval(interval);
-  }, [currentWordIndex]);
-
-
-  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submit behavior
 
@@ -78,87 +29,66 @@ await axios.post('http://localhost:5000/warranty/setup', formData);
       alert('Error submitting form.');
     }
   };
+        return (
+          <div className="app-container">
+          <div className="d-flex justify-content-center align-items-center vh-100">
+            <div className="card p-4 shadow" style={{ width: '400px' }}>
+              <h2 className="text-center mb-4">Sign Up</h2>
 
-
-    return (
-      <>
-      <Navbar/>
-<div className="page-container">
-      <div className="content-wrapper">
-        <div className="typewriter-section">
-          <h1 className="main-text">
-            {text}
-            <span className="cursor">|</span>
-          </h1>
-        </div>
-
-        <div className="login-box">
-          <h2 className="login-title">Register</h2>
-          <form onSubmit={handleSubmit} >
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                placeholder="Enter your username"
-                className="form-input"
-                value={formData.username}
-                onChange={handleChange}
-                required
-                />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email">Enter your email</label>
-              <input
-                type="text"
-                id="email"
-                name="email"
-                placeholder="Enter your email"
-                className="form-input"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Enter your password"
-                className="form-input"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                />
-            </div>
-
-            {/* <div className="form-options">
-              <label className="remember-me">
-              <input type="checkbox" /> Remember me
-              </label>
-              </div> */}
-
+              <form onSubmit={handleSubmit} >
+  {/* Username Field */}
+  <div className="form-group">
+    <label htmlFor="username">Username</label>
+    <input
+      type="text"
+      className="form-control"
+      id="username"
+      name="username"  // Added name attribute
+      placeholder="Enter your name"
+      value={formData.username}
+      onChange={handleChange}
+      required
+    />
+  </div>
+  {/* Email Field */}
+  <div className="form-group">
+    <label htmlFor="email">Email address</label>
+    <input
+      type="email"
+      className="form-control"
+      id="email"
+      name="email"  // Added name attribute
+      placeholder="Enter your email"
+      value={formData.email}
+      onChange={handleChange}
+      required
+    />
+  </div>
+  {/* Password Field */}
+  <div className="form-group">
+    <label htmlFor="password">Password</label>
+    <input
+      type="password"
+      className="form-control"
+      id="password"
+      name="password"  // Added name attribute
+      placeholder="Enter your password"
+      value={formData.password}
+      onChange={handleChange}
+      required
+    />
+  </div>
   <button type="submit" className="btn btn-primary btn-block mt-3">
     Sign Up
   </button>
 </form>
-<div className="social-divider">
-            <span>or</span>
-          </div>
-
-          <button className="guest-button" onClick={handlenavigatelogin}>Login</button>
-        </div>
+          {/* Link to Login page for users with existing accounts */}
+          <div className="text-center mt-3">
+            <p>Already have an account? <Link to="/login" className="text-primary">Login</Link>
+            </p>
+            </div>
+            </div>
       </div>
-    </div>          
-              </>
-  );
-}
-            
-            
-                   
-
+    </div>
+      );
+    }
