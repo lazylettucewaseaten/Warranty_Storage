@@ -47,6 +47,7 @@ const navigate =useNavigate();
             localStorage.setItem("Data" ,formData.email)
             localStorage.setItem("SN", task.data.StoreName);
             localStorage.setItem("SA" ,task.data.StoreLocation)
+            localStorage.setItem("WN" ,task.data.WorkNumber);
             navigate("/Currentwarrantylist");
             
             console.log("chus")
@@ -111,7 +112,7 @@ const navigate =useNavigate();
 
       {/* Forgot Password Link */}
       <div className="form-group d-flex justify-content-between align-items-center">
-        <a href="#forgot-password" className="text-primary">Forgot Password?</a>
+        <a href="/ForgotPassword" className="text-primary">Forgot Password?</a>
       </div>
 
       {/* Submit Button */}

@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from "react-router-dom"; // Hook for navigation
 
 function ForgotPassword() {
+    const navigate =useNavigate();
+    
     const [userDetail, setUserDetail] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle the form submission logic here
         console.log('Reset password request for:', userDetail);
+        localStorage.setItem("email" ,userDetail)
+        let randint =Math.floor(1000 + Math.random() * 9000);
+        navigate("/OTP")
     };
 
     return (
@@ -15,7 +20,7 @@ function ForgotPassword() {
             <div className="card p-4 shadow-lg" style={{ maxWidth: '400px', width: '100%' }}>
                 <h2 className="text-center mb-3">Forgot Password</h2>
                 <p className="text-center text-muted mb-4">
-                    Enter your email address or username to reset your password.
+                    Enter your email address to reset your password.
                 </p>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
@@ -23,7 +28,7 @@ function ForgotPassword() {
                             type="text"
                             name="userDetail"
                             className="form-control"
-                            placeholder="Email or Username"
+                            placeholder="Email"
                             value={userDetail}
                             onChange={(e) => setUserDetail(e.target.value)}
                             required
