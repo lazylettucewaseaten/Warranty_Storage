@@ -291,12 +291,27 @@ const updatewarrantystatus = async (req, res) => {
     try {
         const { id } = req.params;  
         const { status } = req.body; 
-        const updatedWarranty = await UserWarranty.findByIdAndUpdate(
-            id,
-            { status },
-            { new: true } 
-        );
-        res.status(200).json({success:true,updatedWarranty});
+        let {month,year}=req.body;
+        let {currdate}=req.body
+        // const updatedWarranty = await UserWarranty.findByIdAndUpdate(
+        //     id,
+        //     { status },
+        //     { new: true } 
+        // );
+        let date = new Date(currdate);
+        date.setFullYear(date.getFullYear() +Number(year) );
+        // console.log(date.getFullYear() +year )
+        date.setMonth(date.getMonth() + Number(month));
+        date=date.toISOString().split('T')[0];
+        // console.log(date);
+        console.log(status)
+        if(status==='rejected'){
+            date='NA'
+        }
+        await UserWarranty.findByIdAndUpdate(id ,{expiry_date:date,status},{new:true})
+
+        
+        res.status(200).json({success:true});
     } catch (error) {
         console.error(error);
         res.status(500).json({

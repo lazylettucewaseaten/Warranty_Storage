@@ -132,7 +132,11 @@ const DataValidationPage = () => {
       try {
         const response = await axios.patch(
         `http://localhost:5000/warranty/setup/merchantverifications/${selectedItem._id}`,
-        { status: updatedStatus }
+        { status: updatedStatus ,
+          year:yearexpiry,
+          month:monthexpiry,
+          currdate:selectedItem.purchase_date,
+        }
       );
         // console.log(response.data)
         if (response.data.success) {
@@ -259,7 +263,7 @@ const DataValidationPage = () => {
                 <TableCell>{row.store_location}</TableCell>
                 <TableCell>
                   <Chip 
-                    label={row.status || 'pending'}
+                    label={row.expiry_date>Date.now() ? 'Validated': 'Rejcted'}
                     color={getStatusColor(row.status || 'pending')}
                     size="small"
                     />
@@ -278,7 +282,7 @@ const DataValidationPage = () => {
                     </Button>
                   ) : (
                     <Chip 
-                      label={row.status === 'validated' ? Math.round(Date.now() / 2024) : 'Rejected'}
+                      label={row.status === 'validated' ? 'Validated' : 'Rejected'}
                       color={getStatusColor(row.status)}
                       size="small"
                       />
